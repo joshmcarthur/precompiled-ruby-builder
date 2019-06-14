@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 require 'open-uri'
-require "pry"
+require 'pry'
 
 module PrecompiledRubyBuilder
   ##
   # Downloads and parses Ruby releases from the ruby-lang news page
   class ReleasesFromRSS
     def initialize(feed_uri)
-      @feed_uri = URI.parse(feed_uri)
+      @feed_uri = feed_uri
     end
 
     def open_document
-      @document = Nokogiri::XML(@feed_uri.open.read)
+      @document = Nokogiri::XML(open(@feed_uri).read)
     end
 
     def process_item(item)
@@ -19,7 +21,7 @@ module PrecompiledRubyBuilder
       downloads_section = item.css('h2:contains("Download")').first
       return unless downloads_section
 
-      downloads_section.next_element.css('li').map(&method(:process_download))
+      process_download(downloads_section.next_element.css('li').first)
     end
 
     def process_download(download)
@@ -34,7 +36,10 @@ module PrecompiledRubyBuilder
     end
 
     def process_items
-      @document.css('item > description').map(&method(:process_item))
+      @document
+        .css('item > description')
+        .map(&method(:process_item))
+        .compact
     end
 
     def releases
@@ -45,4 +50,3 @@ module PrecompiledRubyBuilder
     end
   end
 end
-
