@@ -12,9 +12,11 @@ module PrecompiledRubyBuilder
       @feed_uri = feed_uri
     end
 
+    # rubocop:disable Security/Open - we are using OpenURI#open
     def open_document
       @document = Nokogiri::XML(open(@feed_uri).read)
     end
+    # rubocop:enable Security/Open - we are using OpenURI#open
 
     def process_item(item)
       item = Nokogiri::HTML(item.text)
