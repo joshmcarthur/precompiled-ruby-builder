@@ -3,3 +3,4 @@ set -e
 
 bundle exec rubocop
 ruby **/*_test.rb
+docker run -v $PWD:/usr/src hashicorp/terraform:light fmt --check=true /usr/src/terraform && echo "Terraform files are formatted correctly."
