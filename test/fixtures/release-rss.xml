@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Ruby News</title>
+    <link>https://www.ruby-lang.org/en/feeds/news.rss</link>
+    <language>en-US</language>
+    <ttl>40</ttl>
+    <description>The latest news from ruby-lang.org.</description>
+    
+   
+ <item>
+      <title>Ruby 2.7.0-preview1 Released</title>
+      <description>&lt;p&gt;We are pleased to announce the release of Ruby 2.7.0-preview1.&lt;/p&gt;
+
+&lt;p&gt;A preview version is released to gather feedback for the final release planned to release on December. It introduces a number of new features and performance improvements, most notably:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Compaction GC&lt;/li&gt;
+  &lt;li&gt;Pattern Matching&lt;/li&gt;
+  &lt;li&gt;REPL improvement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Compaction GC&lt;/h2&gt;
+
+&lt;p&gt;This release introduces Compaction GC which can defragment a fragmented memory space.&lt;/p&gt;
+
+&lt;p&gt;Some multithread Ruby programs may cause memory fragmentation, leading to high memory usage and degraded speed.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;GC.compact&lt;/code&gt; method is introduced for compacting the heap. This function compacts live objects in the heap so that fewer pages may be used, and the heap may be more CoW friendly. &lt;a href=&quot;https://bugs.ruby-lang.org/issues/15626&quot;&gt;#15626&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Pattern Matching [Experimental]&lt;/h2&gt;
+
+&lt;p&gt;Pattern matching, widely used feature in functional programming languages, is introduced as an experimental feature. &lt;a href=&quot;https://bugs.ruby-lang.org/issues/14912&quot;&gt;#14912&lt;/a&gt;
+It can traverse a given object and assign its value if it matches a pattern.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;case JSON.parse('{...}', symbolize_names: true)
+in {name: &quot;Alice&quot;, children: [{name: &quot;Bob&quot;, age: age}]}
+  p age
+  ...
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more details, please see &lt;a href=&quot;https://speakerdeck.com/k_tsj/pattern-matching-new-feature-in-ruby-2-dot-7&quot;&gt;Pattern matching - New feature in Ruby 2.7&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;REPL improvement&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;irb&lt;/code&gt;, bundled interactive environment (REPL; Read-Eval-Print-Loop), now supports multi-line editing. Itâ€™s powered by &lt;code&gt;reline&lt;/code&gt;, &lt;code&gt;readline&lt;/code&gt; compatible pure Ruby implementation.
+It also provides rdoc integration. In &lt;code&gt;irb&lt;/code&gt; you can display the reference for a given class, module, or method.  &lt;a href=&quot;https://bugs.ruby-lang.org/issues/14683&quot;&gt;#14683&lt;/a&gt;, &lt;a href=&quot;https://bugs.ruby-lang.org/issues/14787&quot;&gt;#14787&lt;/a&gt;, &lt;a href=&quot;https://bugs.ruby-lang.org/issues/14918&quot;&gt;#14918&lt;/a&gt;
+Besides, source lines shown at &lt;code&gt;binding.irb&lt;/code&gt; and inspect results for core-class objects are now colorized.&lt;/p&gt;
+
+&lt;video autoplay=&quot;autoplay&quot; controls=&quot;controls&quot; muted=&quot;muted&quot; width=&quot;576&quot; height=&quot;259&quot;&gt;
+  &lt;source src=&quot;https://cache.ruby-lang.org/pub/media/irb_improved_with_key_take2.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+
+&lt;h2&gt;Other Notable New Features&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A method reference operator, &lt;code&gt;.:&lt;/code&gt;, is introduced as an experimental feature.  &lt;a href=&quot;https://bugs.ruby-lang.org/issues/12125&quot;&gt;#12125&lt;/a&gt;, &lt;a href=&quot;https://bugs.ruby-lang.org/issues/13581&quot;&gt;#13581&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Numbered parameter as the default block parameter is introduced as an experimental feature.  &lt;a href=&quot;https://bugs.ruby-lang.org/issues/4475&quot;&gt;#4475&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A beginless range is experimentally introduced.  It might not be as useful
+as an endless range, but would be good for DSL purpose. &lt;a href=&quot;https://bugs.ruby-lang.org/issues/14799&quot;&gt;#14799&lt;/a&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;ary[..3]  # identical to ary[0..3]
+rel.where(sales: ..100)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;Enumerable#tally&lt;/code&gt; is added.  It counts the occurrence of each element.&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;b&quot;].tally
+#=&amp;gt; {&quot;a&quot;=&amp;gt;1, &quot;b&quot;=&amp;gt;2, &quot;c&quot;=&amp;gt;1}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Performance improvements&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;JIT [Experimental]&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;JIT-ed code is recompiled to less-optimized code when an optimization assumption is invalidated.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Method inlining is performed when a method is considered as pure. This optimization is still experimental and many methods are NOT considered as pure yet.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Default value of &lt;code&gt;--jit-min-calls&lt;/code&gt; is changed from 5 to 10,000&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Default value of &lt;code&gt;--jit-max-cache&lt;/code&gt; is changed from 1,000 to 100&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Other notable changes since 2.6&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;Proc.new&lt;/code&gt; and &lt;code&gt;proc&lt;/code&gt; with no block in a method called with a block is warned now.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;lambda&lt;/code&gt; with no block in a method called with a block errs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Update Unicode version and Emoji version from 11.0.0 to 12.0.0.  &lt;a href=&quot;https://bugs.ruby-lang.org/issues/15321&quot;&gt;[Feature #15321]&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Update Unicode version to 12.1.0, adding support for U+32FF SQUARE ERA NAME REIWA.  &lt;a href=&quot;https://bugs.ruby-lang.org/issues/15195&quot;&gt;[Feature #15195]&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;Date.jisx0301&lt;/code&gt;, &lt;code&gt;Date#jisx0301&lt;/code&gt;, and &lt;code&gt;Date.parse&lt;/code&gt; provisionally support the new Japanese era as an informal extension, until the new JIS X 0301 is issued.  &lt;a href=&quot;https://bugs.ruby-lang.org/issues/15742&quot;&gt;[Feature #15742]&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Require compilers to support C99 &lt;a href=&quot;https://bugs.ruby-lang.org/issues/15347&quot;&gt;[Misc #15347]&lt;/a&gt;&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Details of our dialect: &lt;a href=&quot;https://bugs.ruby-lang.org/projects/ruby-trunk/wiki/C99&quot;&gt;https://bugs.ruby-lang.org/projects/ruby-trunk/wiki/C99&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://github.com/ruby/ruby/blob/v2_7_0_preview1/NEWS&quot;&gt;NEWS&lt;/a&gt; or &lt;a href=&quot;https://github.com/ruby/ruby/compare/v2_6_0...v2_7_0_preview1&quot;&gt;commit logs&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;p&gt;With those changes, &lt;a href=&quot;https://github.com/ruby/ruby/compare/v2_6_0...v2_7_0_preview1&quot;&gt;1727 files changed, 76022 insertions(+), 60286 deletions(-)&lt;/a&gt; since Ruby 2.6.0!&lt;/p&gt;
+
+&lt;p&gt;Enjoy programming with Ruby 2.7!&lt;/p&gt;
+
+&lt;h2&gt;Download&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.tar.gz&quot;&gt;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.tar.gz&lt;/a&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;SIZE:   16021286 bytes
+SHA1:   2fbecf42b03a9d4391b81de42caec7fa497747cf
+SHA256: c44500af4a4a0c78a0b4d891272523f28e21176cf9bc1cc108977c5f270eaec2
+SHA512: f731bc9002edd3a61a4955e4cc46a75b5ab687a19c7964f02d3b5b07423d2360d25d7be5df340e884ca9945e3954e68e5eb11b209b65b3a687c71a1abc24b91f
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.zip&quot;&gt;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.zip&lt;/a&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;SIZE:   20283343 bytes
+SHA1:   7488346fa8e58203a38158752d03c8be6b1da65b
+SHA256: fdf25573e72e1769b51b8d541d0e1a894a5394dbfdf1b08215aa093079cca64c
+SHA512: b3b1f59dce94c242ef88a4e68381a4c3a6f90ba0af699083e5a1a00b0fb1dce580f057dad25571fe789ac9aa95aa6e9c071ebb330328dc822217ac9ea9fbeb3f
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.tar.bz2&quot;&gt;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.tar.bz2&lt;/a&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;SIZE:   14038296 bytes
+SHA1:   f7e70cbc2604c53a9e818a2fc59cd0e2d6c859fa
+SHA256: d45b4a1712ec5c03a35e85e33bcb57c7426b856d35e4f04f7975ae3944d09952
+SHA512: a36b241fc1eccba121bb7c2cc5675b11609e0153e25a3a8961b67270c05414b1aa669ce5d4a5ebe4c6b2328ea2b8f8635fbba046b70de103320b3fdcb3d51248
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.tar.xz&quot;&gt;https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0-preview1.tar.xz&lt;/a&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;SIZE:   11442988 bytes
+SHA1:   45e467debc194847a9e3afefb20b11e6dc28ea31
+SHA256: 8c546df3345398b3edc9d0ab097846f033783d33762889fd0f3dc8bb465c3354
+SHA512: d416e90bfa3e49cc0675c4c13243c8ec319b7a0836add1bd16bd7662d09eaf46656d26e772ef3b097e10779896e643edd8a6e4f885147e3235257736adfdf3b5
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;What is Ruby&lt;/h2&gt;
+
+&lt;p&gt;Ruby was first developed by Matz (Yukihiro Matsumoto) in 1993, and is now developed as Open Source. It runs on multiple platforms and is used all over the world especially for web development.&lt;/p&gt;
+
+&lt;p&gt;Posted by naruse on 30 May 2019&lt;/p&gt;</description>
+      <pubDate>Thu, 30 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://www.ruby-lang.org/en/news/2019/05/30/ruby-2-7-0-preview1-released/</guid>
+      <link>https://www.ruby-lang.org/en/news/2019/05/30/ruby-2-7-0-preview1-released/</link>
+    </item>
+    </channel>
+    </rss>

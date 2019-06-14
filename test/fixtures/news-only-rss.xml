@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Ruby News</title>
+    <link>https://www.ruby-lang.org/en/feeds/news.rss</link>
+    <language>en-US</language>
+    <ttl>40</ttl>
+    <description>The latest news from ruby-lang.org.</description>
+    
+   
+    
+    <item>
+      <title>Ruby Repository Moved to Git from Subversion</title>
+      <description>&lt;p&gt;Today, the canonical repository of the Ruby programming language was moved to Git from Subversion.&lt;/p&gt;
+
+&lt;p&gt;The web interface for the new repository is &lt;a href=&quot;https://git.ruby-lang.org&quot;&gt;https://git.ruby-lang.org&lt;/a&gt;, and is provided by cgit. We can keep the commit hash from the contributor on the Ruby repository directly.&lt;/p&gt;
+
+&lt;h2&gt;Development policy&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We donâ€™t use a topic branch on cgit.&lt;/li&gt;
+  &lt;li&gt;The GitHub repository will still be just a mirror. We donâ€™t use the â€œMerge pull requestâ€ feature.&lt;/li&gt;
+  &lt;li&gt;The ruby_2_4, ruby_2_5, and ruby_2_6 branches will continue to use SVN. We donâ€™t push anything to these branches on cgit.&lt;/li&gt;
+  &lt;li&gt;Starting with ruby_2_7, weâ€™ll use cgit to develop stable branches.&lt;/li&gt;
+  &lt;li&gt;We donâ€™t use merge commits.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Special Thanks&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;k0kubun&lt;/p&gt;
+
+    &lt;p&gt;k0kubun aggressively developed toolchains related to release and backport workflows and also updated the hook script for git.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;naruse&lt;/p&gt;
+
+    &lt;p&gt;naruse updated the feature changes for Ruby CI and Redmine (bugs.ruby-lang.org).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;mame&lt;/p&gt;
+
+    &lt;p&gt;mame created the commit notification script for slack.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Future Work&lt;/h2&gt;
+
+&lt;p&gt;We still have to complete some tasks. If you find an issue related to the Git migration, please file it to &lt;a href=&quot;https://bugs.ruby-lang.org/issues/14632&quot;&gt;https://bugs.ruby-lang.org/issues/14632&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+
+&lt;p&gt;Posted by hsbt on 23 Apr 2019&lt;/p&gt;</description>
+      <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://www.ruby-lang.org/en/news/2019/04/23/move-to-git-from-svn/</guid>
+      <link>https://www.ruby-lang.org/en/news/2019/04/23/move-to-git-from-svn/</link>
+    </item>
+    
+    </channel>
+    </rss>
