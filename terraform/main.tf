@@ -33,14 +33,14 @@ EOF
 # This is to optionally manage the CloudWatch Log Group for the Lambda Function.
 # If skipping this resource configuration, also add "logs:CreateLogGroup" to the IAM policy below.
 resource "aws_cloudwatch_log_group" "precompiled_rubies" {
-  name              = "/aws/lambda/precompiled_rubies"
+  name = "/aws/lambda/precompiled_rubies"
   retention_in_days = 7
 }
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
 resource "aws_iam_policy" "lambda_logging" {
-  name        = "lambda_logging"
-  path        = "/"
+  name = "lambda_logging"
+  path = "/"
   description = "IAM policy for logging from a lambda"
 
   policy = <<EOF
